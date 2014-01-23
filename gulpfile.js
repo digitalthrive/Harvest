@@ -30,8 +30,8 @@ gulp.task('webserver', function() {
   var app, base, directory, hostname, port;
   port = 3000;
   hostname = null;
-  base = path.resolve('.');
-  directory = path.resolve('.');
+  base = path.resolve('app');
+  directory = path.resolve('app');
   app = connect().use(connect["static"](base)).use(connect.directory(directory));
   return http.createServer(app).listen(port, hostname);
 });
@@ -45,13 +45,13 @@ gulp.task('livereload', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('scripts/coffee/**/*.coffee').pipe(concat('scripts.coffee')).pipe(coffee()).pipe(uglify()).pipe(gulp.dest('scripts/js')).pipe(refresh(server));
+  return gulp.src('app/scripts/coffee/**/*.coffee').pipe(concat('scripts.coffee')).pipe(coffee()).pipe(uglify()).pipe(gulp.dest('app/scripts/js')).pipe(refresh(server));
 });
 
 gulp.task('styles', function() {
-  return gulp.src('styles/scss/init.scss').pipe(sass({
-    includePaths: ['styles/scss/includes']
-  })).pipe(concat('styles.css')).pipe(gulp.dest('styles/css')).pipe(refresh(server));
+  return gulp.src('app/styles/scss/init.scss').pipe(sass({
+    includePaths: ['app/styles/scss/includes']
+  })).pipe(concat('styles.css')).pipe(gulp.dest('app/styles/css')).pipe(refresh(server));
 });
 
 gulp.task('html', function() {
@@ -60,13 +60,13 @@ gulp.task('html', function() {
 
 gulp.task('default', function() {
   gulp.run('webserver', 'livereload', 'scripts', 'styles');
-  gulp.watch('scripts/coffee/**', function() {
+  gulp.watch('app/scripts/coffee/**', function() {
     return gulp.run('scripts');
   });
-  gulp.watch('styles/scss/**', function() {
+  gulp.watch('app/styles/scss/**', function() {
     return gulp.run('styles');
   });
-  return gulp.watch('*.html', function() {
+  return gulp.watch('app/*.html', function() {
     return gulp.run('html');
   });
 });
