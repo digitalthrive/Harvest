@@ -1,4 +1,4 @@
-var coffee, concat, connect, gulp, gutil, http, lr, open, path, refresh, sass, server, uglify;
+var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify;
 
 gulp = require('gulp');
 
@@ -27,14 +27,19 @@ lr = require('tiny-lr');
 server = lr();
 
 gulp.task('webserver', function() {
-  var app, base, directory, hostname, port;
-  port = 3000;
-  hostname = null;
-  base = path.resolve('app');
-  directory = path.resolve('app');
-  app = connect().use(connect["static"](base)).use(connect.directory(directory));
-  return http.createServer(app).listen(port, hostname);
+  var port;
+  return port = 3000;
 });
+
+hostname = null;
+
+base = path.resolve('app');
+
+directory = path.resolve('app');
+
+app = connect().use(connect["static"](base)).use(connect.directory(directory));
+
+http.createServer(app).listen(port, hostname);
 
 gulp.task('livereload', function() {
   return server.listen(35729, function(err) {
@@ -45,12 +50,12 @@ gulp.task('livereload', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('app/scripts/coffee/**/*.coffee').pipe(concat('scripts.coffee')).pipe(coffee()).pipe(uglify()).pipe(gulp.dest('app/scripts/js')).pipe(refresh(server));
+  return gulp.src('app/scripts/src/**/*.js').pipe(concat('scripts.js')).pipe(uglify()).pipe(gulp.dest('app/scripts/js')).pipe(refresh(server));
 });
 
 gulp.task('styles', function() {
   return gulp.src('app/styles/scss/init.scss').pipe(sass({
-    includePaths: ['app/styles/scss/config','app/styles/scss/general','app/styles/scss/layout','app/styles/scss/pages']
+    includePaths: ['app/styles/scss/general', 'app/styles/scss/pages']
   })).pipe(concat('styles.css')).pipe(gulp.dest('app/styles/css')).pipe(refresh(server));
 });
 
@@ -60,7 +65,7 @@ gulp.task('html', function() {
 
 gulp.task('default', function() {
   gulp.run('webserver', 'livereload', 'scripts', 'styles');
-  gulp.watch('app/scripts/coffee/**', function() {
+  gulp.watch('app/scripts/src/**', function() {
     return gulp.run('scripts');
   });
   gulp.watch('app/styles/scss/**', function() {
