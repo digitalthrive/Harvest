@@ -50,7 +50,7 @@ gulp.task('scripts', function() {
 
 gulp.task('styles', function() {
   return gulp.src('app/styles/scss/init.scss').pipe(sass({
-    includePaths: ['app/styles/scss/includes']
+    includePaths: ['app/styles/scss/config','app/styles/scss/general','app/styles/scss/layout','app/styles/scss/pages']
   })).pipe(concat('styles.css')).pipe(gulp.dest('app/styles/css')).pipe(refresh(server));
 });
 
