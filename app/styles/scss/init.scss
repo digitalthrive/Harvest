@@ -1,7 +1,8 @@
 //misc settings
-@import '_settings';
-@import '_mixins';
+@import 'config/_settings';
+@import 'config/_mixins';
 //frameworks
-@import '_skeleton';
+@import 'general/_skeleton';
 //global things
-@import '_reset';
+@import 'general/_reset';
+@import 'layout/_main';
