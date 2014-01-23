@@ -48,7 +48,7 @@ gulp.task('livereload', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('app/scripts/src/**/*.js').pipe(concat('scripts.js')).pipe(uglify()).pipe(gulp.dest('app/scripts/js')).pipe(refresh(server));
+  return gulp.src('app/scripts/src/**/*.js').pipe(concat('app.js')).pipe(uglify()).pipe(gulp.dest('app/scripts/js')).pipe(refresh(server));
 });
 
 gulp.task('styles', function() {
