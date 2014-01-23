@@ -1,9 +1,0 @@
-{
-  "name": "YourProject",
-  "version": "0.0.1",
-  "dependencies": {
-    "modernizr": "~2.7.1",
-    "respond": "~1.4.2",
-    "selectivizr": "~1.0.2"
-  }
-}
