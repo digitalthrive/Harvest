@@ -1,20 +1,21 @@
 //initialize all of our variables
-var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify;
+var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin;
 
 //load all of our dependencies
 //add more here if you want to include more libraries
-gulp = require('gulp');
-gutil = require('gulp-util');
-coffee = require('gulp-coffee');
-concat = require('gulp-concat');
-uglify = require('gulp-uglify');
-sass = require('gulp-sass');
-refresh = require('gulp-livereload');
-open = require('gulp-open');
-connect = require('connect');
-http = require('http');
-path = require('path');
-lr = require('tiny-lr');
+gulp        = require('gulp');
+gutil       = require('gulp-util');
+coffee      = require('gulp-coffee');
+concat      = require('gulp-concat');
+uglify      = require('gulp-uglify');
+sass        = require('gulp-sass');
+refresh     = require('gulp-livereload');
+open        = require('gulp-open');
+connect     = require('connect');
+http        = require('http');
+path        = require('path');
+lr          = require('tiny-lr');
+imagemin    = require('gulp-imagemin');
 
 //start our server
 server = lr();
@@ -40,6 +41,13 @@ gulp.task('livereload', function() {
             return console.log(err);
         }
     });
+});
+
+//compressing images
+gulp.task('images-deploy', function() {
+    gulp.src('src/images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'));
 });
 
 //compiling our Javascripts
@@ -139,5 +147,5 @@ gulp.task('default', function() {
 //this is our deployment task, it will set everything for deployment-ready files
 gulp.task('deploy', function() {
     //there are no watchers, just compilers
-    gulp.run('scripts-deploy', 'styles-deploy', 'html-deploy');
+    gulp.run('scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy');
 });
