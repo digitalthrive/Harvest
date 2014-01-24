@@ -45,7 +45,7 @@ gulp.task('livereload', function() {
 
 //compressing images
 gulp.task('images-deploy', function() {
-    gulp.src('src/images/*')
+    gulp.src('app/images/*')
         .pipe(imagemin())
         .pipe(gulp.dest('dist/images'));
 });
@@ -106,7 +106,6 @@ gulp.task('styles-deploy', function() {
                }))
                //the final filename of our combined css file
                .pipe(concat('styles.css'))
-               .pipe(compress())
                //where to save our final, compressed css file
                .pipe(gulp.dest('dist/styles'));
 });
