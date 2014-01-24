@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin;
+var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin, minifyCSS;
 
 //load all of our dependencies
 //add more here if you want to include more libraries
@@ -16,6 +16,7 @@ http        = require('http');
 path        = require('path');
 lr          = require('tiny-lr');
 imagemin    = require('gulp-imagemin');
+minifyCSS   = require('gulp-minify-css');
 
 //start our server
 server = lr();
@@ -106,6 +107,7 @@ gulp.task('styles-deploy', function() {
                }))
                //the final filename of our combined css file
                .pipe(concat('styles.css'))
+               .pipe(minifyCSS())
                //where to save our final, compressed css file
                .pipe(gulp.dest('dist/styles'));
 });
