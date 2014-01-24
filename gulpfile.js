@@ -56,6 +56,18 @@ gulp.task('scripts', function() {
                .pipe(refresh(server));
 });
 
+//compiling our Javascripts for deployment
+gulp.task('scripts-deploy', function() {
+    //this is where our dev JS scripts are
+    gulp.src('app/scripts/src/**/*.js')
+                //this is the filename of the compressed version of our JS
+               .pipe(concat('app.js'))
+               //compress :D
+               .pipe(uglify())
+               //where we will store our finalized, compressed script
+               .pipe(gulp.dest('dist/scripts'));
+});
+
 //compiling our SCSS files
 gulp.task('styles', function() {
     //the initializer / master SCSS file, which will just be a file that imports everything
@@ -77,11 +89,37 @@ gulp.task('styles', function() {
                .pipe(refresh(server));
 });
 
+//compiling our SCSS files for deployment
+gulp.task('styles-deploy', function() {
+    //the initializer / master SCSS file, which will just be a file that imports everything
+    gulp.src('app/styles/scss/init.scss')
+                //include SCSS and list every "include" folder
+               .pipe(sass({
+                      includePaths: [
+                          'app/styles/scss/config',
+                          'app/styles/scss/general',
+                          'app/styles/scss/layout',
+                          'app/styles/scss/pages'
+                      ]
+               }))
+               //the final filename of our combined css file
+               .pipe(concat('styles.css'))
+               //where to save our final, compressed css file
+               .pipe(gulp.dest('dist/styles'));
+});
+
 //basically just keeping an eye on all HTML files
 gulp.task('html', function() {
     //watch any and all HTML files and refresh when something changes
     gulp.src('app/*.html')
         .pipe(refresh(server));
+});
+
+//migrating over all HTML files for deployment
+gulp.task('html-deploy', function() {
+    gulp.src('app/*.html')
+        .pipe(uglify())
+        .pipe(gulp.dest('dist'));
 });
 
 //this is our master task when you run `gulp` in CLI / Terminal
@@ -102,4 +140,10 @@ gulp.task('default', function() {
     gulp.watch('app/*.html', function() {
         return gulp.run('html');
     });
+});
+
+//this is our deployment task, it will set everything for deployment-ready files
+gulp.task('deploy', function() {
+    //there are no watchers, just compilers
+    gulp.fun('scripts-deploy', 'styles-deploy', 'html-deploy');
 });
