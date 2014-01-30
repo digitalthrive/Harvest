@@ -10,7 +10,7 @@ Front-end boilerplate for Gulp with everything you need to get started.
 During development mode, run the default task so you'll have watchers and live reload. Simply do the following:
 * Run `gulp` to start it up
 * Open page from http://localhost:3000 in Chrome
-* Try to modify html, scss and coffee files and see how the page gets updated with LiveReload
+* Try to modify html, scss and javascript files and see how the page gets updated with LiveReload
 
 When you're ready to deploy, simply do the following:
 * Run `gulp deploy`
