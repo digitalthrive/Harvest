@@ -15,3 +15,13 @@ During development mode, run the default task so you'll have watchers and live r
 When you're ready to deploy, simply do the following:
 * Run `gulp deploy`
 * All of the files you need will be in /dist with your images optimized, css compressed and js compressed
+
+Updates:
+
+February 03, 2014:
+* Added caching of images so the deploy feature won't compress the same images multiple times
+* Added cleaning of the `dist` folder in case things got deleted at some point
+* Made the dev & dist scripts and css compressed file in the same place so no edits to the href/src needs to be done anymore
+* Added graceful errors during watch, so SCSS or JS errors no longe break the `watch`
+* Updated `gulpfile.js` since gulp.run() is deprecated now
+* Added fonts to the `deploy`

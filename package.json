@@ -16,6 +16,8 @@
     "gulp-util": "*",
     "tiny-lr": "*",
     "gulp-imagemin": "~0.1.4",
-    "gulp-minify-css": "~0.2.0"
+    "gulp-minify-css": "~0.2.0",
+    "gulp-cache": "~0.1.1",
+    "gulp-clean": "~0.2.4"
   }
 }

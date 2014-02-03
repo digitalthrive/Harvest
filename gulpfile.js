@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin, minifyCSS;
+var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin, cache, minifyCSS, clean;
 
 //load all of our dependencies
 //add more here if you want to include more libraries
@@ -16,7 +16,9 @@ http        = require('http');
 path        = require('path');
 lr          = require('tiny-lr');
 imagemin    = require('gulp-imagemin');
+cache       = require('gulp-cache');
 minifyCSS   = require('gulp-minify-css');
+clean       = require('gulp-clean');
 
 //start our server
 server = lr();
@@ -47,7 +49,7 @@ gulp.task('livereload', function() {
 //compressing images
 gulp.task('images-deploy', function() {
     gulp.src('app/images/*')
-        .pipe(imagemin())
+        .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -57,10 +59,12 @@ gulp.task('scripts', function() {
     gulp.src('app/scripts/src/**/*.js')
                 //this is the filename of the compressed version of our JS
                .pipe(concat('app.js'))
+               //catch errors
+               .on('error', gutil.log)
                //compress :D
                .pipe(uglify())
                //where we will store our finalized, compressed script
-               .pipe(gulp.dest('app/scripts/js'))
+               .pipe(gulp.dest('app/scripts'))
                //notify LiveReload to refresh
                .pipe(refresh(server));
 });
@@ -87,10 +91,12 @@ gulp.task('styles', function() {
                           'app/styles/scss/'
                       ]
                }))
+               //catch errors
+               .on('error', gutil.log)
                //the final filename of our combined css file
                .pipe(concat('styles.css'))
                //where to save our final, compressed css file
-               .pipe(gulp.dest('app/styles/css'))
+               .pipe(gulp.dest('app/styles'))
                //notify LiveReload to refresh
                .pipe(refresh(server));
 });
@@ -116,13 +122,23 @@ gulp.task('styles-deploy', function() {
 gulp.task('html', function() {
     //watch any and all HTML files and refresh when something changes
     gulp.src('app/*.html')
-        .pipe(refresh(server));
+        .pipe(refresh(server))
+       //catch errors
+       .on('error', gutil.log);
 });
 
 //migrating over all HTML files for deployment
 gulp.task('html-deploy', function() {
     gulp.src('app/*.html')
         .pipe(gulp.dest('dist'));
+    gulp.src('app/fonts/*')
+        .pipe(gulp.dest('dist/fonts'));
+});
+
+//cleans our dist directory in case things got deleted
+gulp.task('clean', function() {
+  return gulp.src(['dist/*'], {read: false})
+    .pipe(clean());
 });
 
 //this is our master task when you run `gulp` in CLI / Terminal
@@ -132,21 +148,21 @@ gulp.task('default', function() {
     //  startup the web server,
     //  start up livereload
     //  compress all scripts and SCSS files
-    gulp.run('webserver', 'livereload', 'scripts', 'styles');
+    gulp.start('webserver', 'livereload', 'scripts', 'styles');
     //a list of watchers, so it will watch all of the following files waiting for changes
     gulp.watch('app/scripts/src/**', function() {
-        return gulp.run('scripts');
+        return gulp.start('scripts');
     });
     gulp.watch('app/styles/scss/**', function() {
-        return gulp.run('styles');
+        return gulp.start('styles');
     });
     gulp.watch('app/*.html', function() {
-        return gulp.run('html');
+        return gulp.start('html');
     });
 });
 
 //this is our deployment task, it will set everything for deployment-ready files
 gulp.task('deploy', function() {
     //there are no watchers, just compilers
-    gulp.run('scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy');
+    gulp.start('clean', 'scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy');
 });
