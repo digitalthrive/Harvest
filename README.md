@@ -25,3 +25,9 @@ February 03, 2014:
 * Added graceful errors during watch, so SCSS or JS errors no longe break the `watch`
 * Updated `gulpfile.js` since gulp.run() is deprecated now
 * Added fonts to the `deploy`
+
+February 04, 2014:
+* Removed coffee dependency
+* Removed some fingerprinted CSS
+* Fixed some CSS/HTML references
+* Cleaned up the builder and watcher and fixed watcher bugs, namely issue compression w/ SVGs
