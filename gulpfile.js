@@ -58,7 +58,7 @@ gulp.task('images-deploy', function() {
 //compiling our Javascripts
 gulp.task('scripts', function() {
     //this is where our dev JS scripts are
-    gulp.src('app/scripts/src/**/*.js')
+    return gulp.src('app/scripts/src/**/*.js')
                 //this is the filename of the compressed version of our JS
                .pipe(concat('app.js'))
                //catch errors
@@ -74,7 +74,7 @@ gulp.task('scripts', function() {
 //compiling our Javascripts for deployment
 gulp.task('scripts-deploy', function() {
     //this is where our dev JS scripts are
-    gulp.src('app/scripts/src/**/*.js')
+    return gulp.src('app/scripts/src/**/*.js')
                 //this is the filename of the compressed version of our JS
                .pipe(concat('app.js'))
                //compress :D
@@ -86,7 +86,7 @@ gulp.task('scripts-deploy', function() {
 //compiling our SCSS files
 gulp.task('styles', function() {
     //the initializer / master SCSS file, which will just be a file that imports everything
-    gulp.src('app/styles/scss/init.scss')
+    return gulp.src('app/styles/scss/init.scss')
                 //include SCSS and list every "include" folder
                .pipe(sass({
                       includePaths: [
@@ -106,7 +106,7 @@ gulp.task('styles', function() {
 //compiling our SCSS files for deployment
 gulp.task('styles-deploy', function() {
     //the initializer / master SCSS file, which will just be a file that imports everything
-    gulp.src('app/styles/scss/init.scss')
+    return gulp.src('app/styles/scss/init.scss')
                 //include SCSS includes folder
                .pipe(sass({
                       includePaths: [
@@ -123,7 +123,7 @@ gulp.task('styles-deploy', function() {
 //basically just keeping an eye on all HTML files
 gulp.task('html', function() {
     //watch any and all HTML files and refresh when something changes
-    gulp.src('app/*.html')
+    return gulp.src('app/*.html')
         .pipe(refresh(server))
        //catch errors
        .on('error', gutil.log);
@@ -145,26 +145,16 @@ gulp.task('clean', function() {
 
 //this is our master task when you run `gulp` in CLI / Terminal
 //this is the main watcher to use when in active development
-gulp.task('default', function() {
-    //a list of commands to run when it starts up, so it will:
-    //  startup the web server,
-    //  start up livereload
-    //  compress all scripts and SCSS files
-    gulp.start('webserver', 'livereload', 'scripts', 'styles');
+//  this will:
+//  startup the web server,
+//  start up livereload
+//  compress all scripts and SCSS files
+gulp.task('default', ['webserver', 'livereload', 'scripts', 'styles'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
-    gulp.watch('app/scripts/src/**', function() {
-        return gulp.start('scripts');
-    });
-    gulp.watch('app/styles/scss/**', function() {
-        return gulp.start('styles');
-    });
-    gulp.watch('app/*.html', function() {
-        return gulp.start('html');
-    });
+    gulp.watch('app/scripts/src/**', ['scripts']);
+    gulp.watch('app/styles/scss/**', ['styles']);
+    gulp.watch('app/*.html', ['html']);
 });
 
 //this is our deployment task, it will set everything for deployment-ready files
-gulp.task('deploy', function() {
-    //there are no watchers, just compilers
-    gulp.start('clean', 'scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy');
-});
+gulp.task('deploy', ['clean', 'scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy']);
