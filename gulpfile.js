@@ -48,7 +48,7 @@ gulp.task('livereload', function() {
 
 //compressing images
 gulp.task('images-deploy', function() {
-    gulp.src('app/images/*')
+    gulp.src(['app/images/*.jpg', 'app/images/*.png'])
         .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
         .pipe(gulp.dest('dist/images'));
 });
