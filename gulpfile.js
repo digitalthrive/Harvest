@@ -1,11 +1,10 @@
 //initialize all of our variables
-var app, base, coffee, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin, cache, minifyCSS, clean;
+var app, base, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin, cache, minifyCSS, clean;
 
 //load all of our dependencies
 //add more here if you want to include more libraries
 gulp        = require('gulp');
 gutil       = require('gulp-util');
-coffee      = require('gulp-coffee');
 concat      = require('gulp-concat');
 uglify      = require('gulp-uglify');
 sass        = require('gulp-sass');
