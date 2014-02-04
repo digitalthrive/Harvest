@@ -46,10 +46,13 @@ gulp.task('livereload', function() {
     });
 });
 
-//compressing images
+//compressing images & handle SVG files
 gulp.task('images-deploy', function() {
     gulp.src(['app/images/*.jpg', 'app/images/*.png'])
         .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+        .pipe(gulp.dest('dist/images'));
+    //move over any SVG files
+    gulp.src('app/images/*.svg')
         .pipe(gulp.dest('dist/images'));
 });
 
