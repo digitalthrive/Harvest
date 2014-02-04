@@ -8,7 +8,6 @@
   "devDependencies": {
     "connect": "*",
     "gulp": "*",
-    "gulp-coffee": "*",
     "gulp-concat": "*",
     "gulp-livereload": "*",
     "gulp-sass": "*",
