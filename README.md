@@ -31,3 +31,4 @@ February 04, 2014:
 * Removed some fingerprinted CSS
 * Fixed some CSS/HTML references
 * Cleaned up the builder and watcher and fixed watcher bugs, namely issue compression w/ SVGs
+* Merged pull request from @Contra who added some best practices, thanks! :)
