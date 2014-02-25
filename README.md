@@ -32,3 +32,10 @@ February 04, 2014:
 * Fixed some CSS/HTML references
 * Cleaned up the builder and watcher and fixed watcher bugs, namely issue compression w/ SVGs
 * Merged pull request from @Contra who added some best practices, thanks! :)
+* 
+
+February 25, 2014
+* I've been using this more in development and production, so this has been fine tuned a bit
+* I added fonts and other misc assets that should be moved from `dev` to `dist` upon deployment
+* I removed image caching because there was an issue where it would randomly break all of the images. I'll figure this but out later though.
+* Updated npm dependencies accordingly
