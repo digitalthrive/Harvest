@@ -48,7 +48,7 @@ gulp.task('livereload', function() {
 //compressing images & handle SVG files
 gulp.task('images-deploy', function() {
     gulp.src(['app/images/*.jpg', 'app/images/*.png'])
-        .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
         .pipe(gulp.dest('dist/images'));
     //move over any SVG files
     gulp.src('app/images/*.svg')
@@ -133,8 +133,20 @@ gulp.task('html', function() {
 gulp.task('html-deploy', function() {
     gulp.src('app/*.html')
         .pipe(gulp.dest('dist'));
+
     gulp.src('app/fonts/*')
         .pipe(gulp.dest('dist/fonts'));
+
+    gulp.src('app/styles/ie.css')
+        .pipe(gulp.dest('dist/styles'));
+
+    //move over any GIF files
+    gulp.src('app/images/*.gif')
+        .pipe(gulp.dest('dist/images'));
+
+    //move over htaccess
+    gulp.src('app/.htaccess')
+        .pipe(gulp.dest('dist'));
 });
 
 //cleans our dist directory in case things got deleted
@@ -157,4 +169,6 @@ gulp.task('default', ['webserver', 'livereload', 'scripts', 'styles'], function(
 });
 
 //this is our deployment task, it will set everything for deployment-ready files
-gulp.task('deploy', ['clean', 'scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy']);
+gulp.task('deploy', ['clean'], function () {
+  gulp.start('scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy');
+});
