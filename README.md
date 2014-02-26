@@ -16,7 +16,13 @@ When you're ready to deploy, simply do the following:
 * Run `gulp deploy`
 * All of the files you need will be in /dist with your images optimized, css compressed and js compressed
 
-Updates:
+To Do
+==========================
+* Fix watch SCSS error handling
+* Add gulp-newer to `dist` images, and possibly other areas
+
+Revision History
+==========================
 
 February 03, 2014:
 * Added caching of images so the deploy feature won't compress the same images multiple times
