@@ -138,6 +138,10 @@ gulp.task('html-deploy', function() {
     gulp.src('app/*')
         .pipe(gulp.dest('dist'));
 
+    //grab any hidden files too
+    gulp.src('app/.*')
+        .pipe(gulp.dest('dist'));
+
     gulp.src('app/fonts/*')
         .pipe(gulp.dest('dist/fonts'));
 
