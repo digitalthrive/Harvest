@@ -20,15 +20,15 @@
   "devDependencies": {
     "connect": "*",
     "gulp": "*",
+    "gulp-cache": "~0.1.1",
+    "gulp-clean": "^0.2.4",
     "gulp-concat": "*",
+    "gulp-imagemin": "^0.1.5",
     "gulp-livereload": "*",
+    "gulp-minify-css": "^0.2.0",
     "gulp-sass": "*",
     "gulp-uglify": "*",
     "gulp-util": "*",
-    "tiny-lr": "*",
-    "gulp-imagemin": "~0.1.4",
-    "gulp-minify-css": "~0.2.0",
-    "gulp-cache": "~0.1.1",
-    "gulp-clean": "~0.2.4"
+    "tiny-lr": "*"
   }
 }
