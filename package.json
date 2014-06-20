@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "description": "Description of your project",
   "dependencies": {
-  },
-  "devDependencies": {
     "connect": "^3.0.1",
     "gulp": "^3.8.1",
     "gulp-cache": "~0.1.11",
@@ -18,5 +16,7 @@
     "gulp-uglify": "^0.3.0",
     "gulp-util": "^2.2.17",
     "tiny-lr": "0.0.7"
+  },
+  "devDependencies": {
   }
 }
