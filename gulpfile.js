@@ -91,6 +91,7 @@ gulp.task('styles', function() {
     return gulp.src('app/styles/scss/init.scss')
                 //include SCSS and list every "include" folder
                .pipe(sass({
+                      errLogToConsole: true,
                       includePaths: [
                           'app/styles/scss/'
                       ]
