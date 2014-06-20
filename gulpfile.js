@@ -46,12 +46,14 @@ gulp.task('livereload', function() {
 });
 
 //compressing images & handle SVG files
-gulp.task('images-deploy', function() {
+gulp.task('images', function() {
     gulp.src(['app/images/*.jpg', 'app/images/*.png'])
-        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
-        .pipe(gulp.dest('dist/images'));
-    //move over any SVG files
-    gulp.src('app/images/*.svg')
+        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }));
+});
+
+//compressing images & handle SVG files
+gulp.task('images-deploy', function() {
+    gulp.src(['app/images/*'])
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -131,22 +133,16 @@ gulp.task('html', function() {
 
 //migrating over all HTML files for deployment
 gulp.task('html-deploy', function() {
-    gulp.src('app/*.html')
+    //grab everything, which should include htaccess, robots, etc
+    gulp.src('app/*')
         .pipe(gulp.dest('dist'));
 
     gulp.src('app/fonts/*')
         .pipe(gulp.dest('dist/fonts'));
 
-    gulp.src('app/styles/ie.css')
+    //grab all of the styles
+    gulp.src('app/styles/*.css')
         .pipe(gulp.dest('dist/styles'));
-
-    //move over any GIF files
-    gulp.src('app/images/*.gif')
-        .pipe(gulp.dest('dist/images'));
-
-    //move over htaccess
-    gulp.src('app/.htaccess')
-        .pipe(gulp.dest('dist'));
 });
 
 //cleans our dist directory in case things got deleted
@@ -161,10 +157,11 @@ gulp.task('clean', function() {
 //  startup the web server,
 //  start up livereload
 //  compress all scripts and SCSS files
-gulp.task('default', ['webserver', 'livereload', 'scripts', 'styles'], function() {
+gulp.task('default', ['webserver', 'livereload', 'scripts', 'styles', 'images'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
     gulp.watch('app/scripts/src/**', ['scripts']);
     gulp.watch('app/styles/scss/**', ['styles']);
+    gulp.watch('app/images/**', ['images']);
     gulp.watch('app/*.html', ['html']);
 });
 
