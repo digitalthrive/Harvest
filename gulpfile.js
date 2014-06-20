@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, concat, connect, directory, gulp, gutil, hostname, http, lr, open, path, refresh, sass, server, uglify, imagemin, cache, minifyCSS, clean;
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, cache, minifyCSS, clean, connect;
 
 //load all of our dependencies
 //add more here if you want to include more libraries
@@ -8,42 +8,19 @@ gutil       = require('gulp-util');
 concat      = require('gulp-concat');
 uglify      = require('gulp-uglify');
 sass        = require('gulp-sass');
-refresh     = require('gulp-livereload');
-open        = require('gulp-open');
-connect     = require('connect');
-http        = require('http');
-path        = require('path');
-lr          = require('tiny-lr');
 imagemin    = require('gulp-imagemin');
 cache       = require('gulp-cache');
 minifyCSS   = require('gulp-minify-css');
 clean       = require('gulp-clean');
+connect = require('gulp-connect');
 
-//start our server
-server = lr();
-
-//this starts the webserver so we can run localhost:3000 and sync with the LiveReload plugin
-gulp.task('webserver', function() {
-    //the port to run our local webserver on
-    var port = 3000;
-    hostname = null;
-    //the directory to our working environment
-    base = path.resolve('app');
-    directory = path.resolve('app');
-    //start up the server
-    app = connect().use(connect["static"](base)).use(connect.directory(directory));
-    http.createServer(app).listen(port, hostname);
+gulp.task('connect', function() {
+  connect.server({
+    root: 'app',
+    livereload: true
+  });
 });
 
-//connecting to the live reload plugin, basically notifies the browser to refresh when we want it to
-gulp.task('livereload', function() {
-    //this is the default port, you shouldn't need to edit it
-    server.listen(35729, function(err) {
-        if (err != null) {
-            return console.log(err);
-        }
-    });
-});
 
 //compressing images & handle SVG files
 gulp.task('images', function() {
@@ -70,7 +47,7 @@ gulp.task('scripts', function() {
                //where we will store our finalized, compressed script
                .pipe(gulp.dest('app/scripts'))
                //notify LiveReload to refresh
-               .pipe(refresh(server));
+               .pipe(connect.reload());
 });
 
 //compiling our Javascripts for deployment
@@ -103,7 +80,7 @@ gulp.task('styles', function() {
                //where to save our final, compressed css file
                .pipe(gulp.dest('app/styles'))
                //notify LiveReload to refresh
-               .pipe(refresh(server));
+               .pipe(connect.reload());
 });
 
 //compiling our SCSS files for deployment
@@ -127,7 +104,7 @@ gulp.task('styles-deploy', function() {
 gulp.task('html', function() {
     //watch any and all HTML files and refresh when something changes
     return gulp.src('app/*.html')
-        .pipe(refresh(server))
+        .pipe(connect.reload())
        //catch errors
        .on('error', gutil.log);
 });
@@ -146,7 +123,7 @@ gulp.task('html-deploy', function() {
         .pipe(gulp.dest('dist/fonts'));
 
     //grab all of the styles
-    gulp.src('app/styles/*.css')
+    gulp.src(['app/styles/*.css', '!app/styles/styles.css'])
         .pipe(gulp.dest('dist/styles'));
 });
 
@@ -162,7 +139,7 @@ gulp.task('clean', function() {
 //  startup the web server,
 //  start up livereload
 //  compress all scripts and SCSS files
-gulp.task('default', ['webserver', 'livereload', 'scripts', 'styles', 'images'], function() {
+gulp.task('default', ['connect', 'scripts', 'styles', 'images'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
     gulp.watch('app/scripts/src/**', ['scripts']);
     gulp.watch('app/styles/scss/**', ['styles']);
