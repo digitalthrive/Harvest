@@ -9,7 +9,7 @@ Front-end boilerplate for Gulp with everything you need to get started.
 
 During development mode, run the default task so you'll have watchers and live reload. Simply do the following:
 * Run `gulp` to start it up
-* Open page from http://localhost:3000 in Chrome
+* Open page from http://localhost:8080 in Chrome
 * Try to modify html, scss and javascript files and see how the page gets updated with LiveReload
 
 When you're ready to deploy, simply do the following:
@@ -23,6 +23,15 @@ To Do
 
 Revision History
 ==========================
+
+June 20, 2014:
+* Updated dependencies
+* Completely changed how webserver and livereload works
+* Refactored a lot of the build task, it is much more modular and flexible
+* Added some extra boilerplate
+* Removed a lot of the footprint styles, including the entire Skeleton framework
+* Fixed SASS crashing on syntax/coding error
+* Using default port number now (8080) for web server
 
 February 03, 2014:
 * Added caching of images so the deploy feature won't compress the same images multiple times
@@ -38,7 +47,6 @@ February 04, 2014:
 * Fixed some CSS/HTML references
 * Cleaned up the builder and watcher and fixed watcher bugs, namely issue compression w/ SVGs
 * Merged pull request from @Contra who added some best practices, thanks! :)
-* 
 
 February 25, 2014
 * I've been using this more in development and production, so this has been fine tuned a bit
