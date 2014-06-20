@@ -12,7 +12,7 @@ imagemin    = require('gulp-imagemin');
 cache       = require('gulp-cache');
 minifyCSS   = require('gulp-minify-css');
 clean       = require('gulp-clean');
-connect = require('gulp-connect');
+connect     = require('gulp-connect');
 
 gulp.task('connect', function() {
   connect.server({
@@ -23,7 +23,8 @@ gulp.task('connect', function() {
 
 
 //compressing images & handle SVG files
-gulp.task('images', function() {
+gulp.task('images', function(tmp) {
+    console.log(tmp);
     gulp.src(['app/images/*.jpg', 'app/images/*.png'])
         .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }));
 });
@@ -139,7 +140,7 @@ gulp.task('clean', function() {
 //  startup the web server,
 //  start up livereload
 //  compress all scripts and SCSS files
-gulp.task('default', ['connect', 'scripts', 'styles', 'images'], function() {
+gulp.task('default', ['connect', 'scripts', 'styles'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
     gulp.watch('app/scripts/src/**', ['scripts']);
     gulp.watch('app/styles/scss/**', ['styles']);
