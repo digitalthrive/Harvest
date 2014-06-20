@@ -18,8 +18,10 @@ When you're ready to deploy, simply do the following:
 
 To Do
 ==========================
-* Fix watch SCSS error handling
-* Add gulp-newer to `dist` images, and possibly other areas
+* Add in handlebars or dust.js for templating
+* Add better details about what's included in the boilerplate / workflow
+* Add details about each task runner
+* Make website for it
 
 Revision History
 ==========================
