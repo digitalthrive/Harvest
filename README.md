@@ -4,7 +4,7 @@ Front End Gulp Boilerplate
 Front-end boilerplate for Gulp with everything you need to get started.
 
 * First download or clone this repo :)
-* Then run `npm install` to install dev dependencies.
+* Then run `sudo npm install` to install dev dependencies. You have to use sudo because some of the dependencies install executable binaries.
 * Make sure you install [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) plugin for Google Chrome and enable it (click it so the middle dot is black)
 
 During development mode, run the default task so you'll have watchers and live reload. Simply do the following:
@@ -25,6 +25,9 @@ To Do
 
 Revision History
 ==========================
+
+August 14, 2014:
+* Finally figured out how to get all of the dependencies into dev, not production
 
 June 20, 2014:
 * Updated dependencies
