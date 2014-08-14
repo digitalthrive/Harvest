@@ -16,12 +16,9 @@ When you're ready to deploy, simply do the following:
 * Run `gulp deploy`
 * All of the files you need will be in /dist with your images optimized, css compressed and js compressed
 
-To Do
+More Information
 ==========================
-* Add in handlebars or dust.js for templating
-* Add better details about what's included in the boilerplate / workflow
-* Add details about each task runner
-* Make website for it
+Check out the website http://www.ryanbensonmedia.com/harvest for more information. And more detailed documentation is coming soon!
 
 Revision History
 ==========================
