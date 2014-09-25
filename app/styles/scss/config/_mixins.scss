@@ -129,11 +129,25 @@
     -ms-filter:        "FlipH";
 }
 
-@mixin font-face($fontFamily: myFont, $eotFileSrc: 'myFont.eot', $woffFileSrc: 'myFont.woff', $ttfFileSrc: 'myFont.ttf') {
-  font-family: $fontFamily;
-  src: url($eotFileSrc)  format('eot'),
-       url($woffFileSrc) format('woff'),
-       url($ttfFileSrc)  format('truetype');
+@mixin font-face($style-name, $file, $family, $category:"") {
+  $filepath: "../fonts/" + $family + "/" + $file;
+  @font-face {
+    font-family: #{$style-name};
+    src: url($filepath + ".eot");
+    src: url($filepath + ".eot?#iefix") format("embedded-opentype"), url($filepath + ".woff") format("woff"), url($filepath + ".ttf") format("truetype"), url($filepath + ".svg#" + $style-name + "") format("svg");
+  }
+
+  %#{$style-name} {
+    font: {
+      @if $category != "" {
+        family: #{$style-name}, #{$category};
+      }
+      @else {
+        family: #{$style-name};
+      }
+      weight: normal;
+    };
+  }
 }
 
 @mixin outline-radius($radius: 5px) {
@@ -169,13 +183,10 @@
     transform:         $params;
 }
 
-@mixin transition($what: all, $length: 1s, $easing: ease-in-out) {
-    -moz-transition:    $what $length $easing;
-    -o-transition:      $what $length $easing;
-    -webkit-transition: $what $length $easing;
-    -ms-transition:     $what $length $easing;
-    transition:         $what $length $easing;
-
+@mixin transition($declarations...) {
+  @each $prefix in '-webkit-', '-moz-', '-ms-', '-o-', '' {
+    #{$prefix}transition: $declarations;
+  }
 }
 
 @mixin triple-borders($colorOne: #3C3C3C, $colorTwo: #999999, $colorThree: #000000, $radius: 0) {
