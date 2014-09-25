@@ -31,7 +31,7 @@ gulp.task('images', function(tmp) {
 
 //compressing images & handle SVG files
 gulp.task('images-deploy', function() {
-    gulp.src(['app/images/*'])
+    gulp.src(['app/images/**/*'])
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -120,7 +120,7 @@ gulp.task('html-deploy', function() {
     gulp.src('app/.*')
         .pipe(gulp.dest('dist'));
 
-    gulp.src('app/fonts/*')
+    gulp.src('app/fonts/**/*')
         .pipe(gulp.dest('dist/fonts'));
 
     //grab all of the styles
