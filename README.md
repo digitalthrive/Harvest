@@ -22,6 +22,11 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+September 25, 2014
+* Merged pull request form @hhff
+  * Improved gitignore for sass cache
+  * Improved font-face mixing
+  * Updated images and fonts gulp task for nested files
 
 August 14, 2014:
 * Finally figured out how to get all of the dependencies into dev, not production
