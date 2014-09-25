@@ -183,13 +183,10 @@
     transform:         $params;
 }
 
-@mixin transition($what: all, $length: 1s, $easing: ease-in-out) {
-    -moz-transition:    $what $length $easing;
-    -o-transition:      $what $length $easing;
-    -webkit-transition: $what $length $easing;
-    -ms-transition:     $what $length $easing;
-    transition:         $what $length $easing;
-
+@mixin transition($declarations...) {
+  @each $prefix in '-webkit-', '-moz-', '-ms-', '-o-', '' {
+    #{$prefix}transition: $declarations;
+  }
 }
 
 @mixin triple-borders($colorOne: #3C3C3C, $colorTwo: #999999, $colorThree: #000000, $radius: 0) {
