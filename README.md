@@ -22,7 +22,7 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
-October 17, 2104
+October 17, 2014
 * Removed recently deprecated `gulp-clean` module
 * Using `del` module instead
 * Updated gulpfile to use del method to cleanse the dist folder prior to the deployment task
