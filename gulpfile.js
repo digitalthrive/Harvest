@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, cache, minifyCSS, clean, connect;
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, cache, minifyCSS, del, connect;
 
 //load all of our dependencies
 //add more here if you want to include more libraries
@@ -11,8 +11,8 @@ sass        = require('gulp-sass');
 imagemin    = require('gulp-imagemin');
 cache       = require('gulp-cache');
 minifyCSS   = require('gulp-minify-css');
-clean       = require('gulp-clean');
 connect     = require('gulp-connect');
+del         = require('del');
 
 gulp.task('connect', function() {
   connect.server({
@@ -130,8 +130,7 @@ gulp.task('html-deploy', function() {
 
 //cleans our dist directory in case things got deleted
 gulp.task('clean', function() {
-  return gulp.src(['dist/*'], {read: false})
-    .pipe(clean());
+    del('dist');
 });
 
 //this is our master task when you run `gulp` in CLI / Terminal
