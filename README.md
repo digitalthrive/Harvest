@@ -22,6 +22,9 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+Nov 20, 2014
+* Added auto-prefixer support
+
 October 17, 2014
 * Removed recently deprecated `gulp-clean` module
 * Using `del` module instead
