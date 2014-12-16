@@ -18,7 +18,7 @@ When you're ready to deploy, simply do the following:
 
 More Information
 ==========================
-Check out the website http://www.ryanbensonmedia.com/harvest for more information. And more detailed documentation is coming soon!
+Check out the website http://www.ryanbensonmedia.com/harvest for more information. And the documentation part is finally updated!
 
 Revision History
 ==========================
