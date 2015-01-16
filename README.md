@@ -22,6 +22,9 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+January 16, 2014
+* Merge pull request from @quakenul fixing concat order issue with JS
+
 November 20, 2014
 * Added auto-prefixer support
 
