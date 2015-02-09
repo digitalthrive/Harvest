@@ -57,7 +57,7 @@ gulp.task('scripts', function() {
 //compiling our Javascripts for deployment
 gulp.task('scripts-deploy', function() {
     //this is where our dev JS scripts are
-    return gulp.src('app/scripts/src/**/*.js')
+    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/**/*.js'])
                 //this is the filename of the compressed version of our JS
                .pipe(concat('app.js'))
                //compress :D
