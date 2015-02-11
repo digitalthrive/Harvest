@@ -35,9 +35,6 @@ table, th, td {
 blockquote before, blockquote after, q before, q after {
   content: ''; }
 
-blockquote, q {
-  quotes: "" ""; }
-
 a img {
   border: none; }
 
