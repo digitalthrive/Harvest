@@ -16,12 +16,23 @@ When you're ready to deploy, simply do the following:
 * Run `gulp deploy`
 * All of the files you need will be in /dist with your images optimized, css compressed and js compressed
 
+Version
+==========================
+1.1.1
+
 More Information
 ==========================
 Check out the website http://www.ryanbensonmedia.com/harvest for more information. And the documentation part is finally updated!
 
 Revision History
 ==========================
+February 11, 2015
+* Updated npm dependency versions
+* Updated to latest HTML5 Boilerplate (slightly modified)
+* Updated CSS and JS vendors
+* Removed a couple unused modules
+* Started using version numbers and git flow
+
 January 16, 2014
 * Merge pull request from @quakenul fixing concat order issue with JS
 
