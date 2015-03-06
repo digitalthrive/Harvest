@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, connect, autoprefixer;
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, connect, autoprefixer, gulpSequence, shell;
 
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
@@ -13,8 +13,9 @@ sass        = require('gulp-sass');
 imagemin    = require('gulp-imagemin');
 minifyCSS   = require('gulp-minify-css');
 connect     = require('gulp-connect');
-del         = require('del');
 autoprefixer = require('gulp-autoprefixer');
+gulpSequence = require('gulp-sequence').use(gulp);
+shell       = require('gulp-shell');
 
 gulp.task('connect', function() {
   connect.server({
