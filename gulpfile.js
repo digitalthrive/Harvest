@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, connect, autoprefixer;
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, connect, autoprefixer, gulpSequence, shell;
 
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
@@ -13,8 +13,9 @@ sass        = require('gulp-sass');
 imagemin    = require('gulp-imagemin');
 minifyCSS   = require('gulp-minify-css');
 connect     = require('gulp-connect');
-del         = require('del');
 autoprefixer = require('gulp-autoprefixer');
+gulpSequence = require('gulp-sequence').use(gulp);
+shell       = require('gulp-shell');
 
 gulp.task('connect', function() {
   connect.server({
@@ -33,7 +34,7 @@ gulp.task('images', function(tmp) {
 
 //compressing images & handle SVG files
 gulp.task('images-deploy', function() {
-    gulp.src(['app/images/**/*'])
+    gulp.src(['app/images/**/*', '!app/images/README'])
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -140,7 +141,21 @@ gulp.task('html-deploy', function() {
 
 //cleans our dist directory in case things got deleted
 gulp.task('clean', function() {
-    del('dist');
+    return shell.task([
+      'rm -rf dist'
+    ]);
+});
+
+//create folders using shell
+gulp.task('scaffold', function() {
+  return shell.task([
+      'mkdir dist',
+      'mkdir dist/fonts',
+      'mkdir dist/images',
+      'mkdir dist/scripts',
+      'mkdir dist/styles'
+    ]
+  );
 });
 
 //this is our master task when you run `gulp` in CLI / Terminal
@@ -158,6 +173,4 @@ gulp.task('default', ['connect', 'scripts', 'styles'], function() {
 });
 
 //this is our deployment task, it will set everything for deployment-ready files
-gulp.task('deploy', ['clean'], function () {
-  gulp.start('scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy');
-});
+gulp.task('deploy', gulpSequence('clean', 'scaffold', ['scripts-deploy', 'styles-deploy', 'images-deploy'], 'html-deploy'));
