@@ -18,7 +18,7 @@ When you're ready to deploy, simply do the following:
 
 Version
 ==========================
-1.1.1
+1.1.3
 
 More Information
 ==========================
@@ -26,6 +26,12 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+March 6, 2015
+* Removed del lib, it was causing issues with deployments
+* Added sequence and shell libraries
+* Moved deployment task to use sequence
+* Using CLI to remove and setup dist folders on deployment, resolved bugs
+
 February 11, 2015
 * Updated npm dependency versions
 * Updated to latest HTML5 Boilerplate (slightly modified)
