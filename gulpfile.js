@@ -34,7 +34,7 @@ gulp.task('images', function(tmp) {
 
 //compressing images & handle SVG files
 gulp.task('images-deploy', function() {
-    gulp.src(['app/images/**/*'])
+    gulp.src(['app/images/**/*', '!app/images/README'])
         .pipe(gulp.dest('dist/images'));
 });
 
@@ -141,7 +141,21 @@ gulp.task('html-deploy', function() {
 
 //cleans our dist directory in case things got deleted
 gulp.task('clean', function() {
-    del('dist');
+    return shell.task([
+      'rm -rf dist'
+    ]);
+});
+
+//create folders using shell
+gulp.task('scaffold', function() {
+  return shell.task([
+      'mkdir dist',
+      'mkdir dist/fonts',
+      'mkdir dist/images',
+      'mkdir dist/scripts',
+      'mkdir dist/styles'
+    ]
+  );
 });
 
 //this is our master task when you run `gulp` in CLI / Terminal
@@ -159,6 +173,4 @@ gulp.task('default', ['connect', 'scripts', 'styles'], function() {
 });
 
 //this is our deployment task, it will set everything for deployment-ready files
-gulp.task('deploy', ['clean'], function () {
-  gulp.start('scripts-deploy', 'styles-deploy', 'html-deploy', 'images-deploy');
-});
+gulp.task('deploy', gulpSequence('clean', 'scaffold', ['scripts-deploy', 'styles-deploy', 'images-deploy'], 'html-deploy'));
