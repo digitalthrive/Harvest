@@ -5,12 +5,10 @@ Front-end boilerplate for Gulp with everything you need to get started.
 
 * First download or clone this repo :)
 * Then run `sudo npm install` to install dev dependencies. You have to use sudo because some of the dependencies install executable binaries.
-* Make sure you install [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) plugin for Google Chrome and enable it (click it so the middle dot is black)
 
-During development mode, run the default task so you'll have watchers and live reload. Simply do the following:
+During development mode, run the default task so you'll have watchers and browser sync. Simply do the following:
 * Run `gulp` to start it up
-* Open page from http://localhost:8080 in Chrome
-* Try to modify html, scss and javascript files and see how the page gets updated with LiveReload
+* Try to modify html, scss and javascript files and see how the page gets updated with BrowserSync
 
 When you're ready to deploy, simply do the following:
 * Run `gulp deploy`
@@ -18,7 +16,7 @@ When you're ready to deploy, simply do the following:
 
 Version
 ==========================
-1.1.3
+1.2.0
 
 More Information
 ==========================
@@ -26,6 +24,14 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+April 13, 2015
+* Merged PR from @telephant00
+* Fixed image dev task, it wasn't pushing images to a dest
+* Removed README from images folder, causing segfault errors
+
+April 9, 2015
+* Removed LiveReload in favor of BrowserSync
+
 March 6, 2015
 * Removed del lib, it was causing issues with deployments
 * Added sequence and shell libraries

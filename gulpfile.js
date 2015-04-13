@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, connect, autoprefixer, gulpSequence, shell;
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell;
 
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
@@ -12,24 +12,29 @@ uglify      = require('gulp-uglify');
 sass        = require('gulp-sass');
 imagemin    = require('gulp-imagemin');
 minifyCSS   = require('gulp-minify-css');
-connect     = require('gulp-connect');
+browserSync = require('browser-sync');
 autoprefixer = require('gulp-autoprefixer');
 gulpSequence = require('gulp-sequence').use(gulp);
 shell       = require('gulp-shell');
 
-gulp.task('connect', function() {
-  connect.server({
-    root: 'app',
-    livereload: true
-  });
+gulp.task('browserSync', function() {
+    browserSync({
+        server: {
+            baseDir: "app/"
+        },
+        options: {
+            reloadDelay: 250
+        },
+        notify: false
+    });
 });
 
 
 //compressing images & handle SVG files
 gulp.task('images', function(tmp) {
-    console.log(tmp);
     gulp.src(['app/images/*.jpg', 'app/images/*.png'])
-        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }));
+        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
+        .pipe(gulp.dest('app/images'));
 });
 
 //compressing images & handle SVG files
@@ -50,8 +55,8 @@ gulp.task('scripts', function() {
                .pipe(uglify())
                //where we will store our finalized, compressed script
                .pipe(gulp.dest('app/scripts'))
-               //notify LiveReload to refresh
-               .pipe(connect.reload());
+               //notify browserSync to refresh
+               .pipe(browserSync.reload({stream: true}));
 });
 
 //compiling our Javascripts for deployment
@@ -87,8 +92,8 @@ gulp.task('styles', function() {
                .pipe(concat('styles.css'))
                //where to save our final, compressed css file
                .pipe(gulp.dest('app/styles'))
-               //notify LiveReload to refresh
-               .pipe(connect.reload());
+               //notify browserSync to refresh
+               .pipe(browserSync.reload({stream: true}));
 });
 
 //compiling our SCSS files for deployment
@@ -116,7 +121,7 @@ gulp.task('styles-deploy', function() {
 gulp.task('html', function() {
     //watch any and all HTML files and refresh when something changes
     return gulp.src('app/*.html')
-        .pipe(connect.reload())
+        .pipe(browserSync.reload({stream: true}))
        //catch errors
        .on('error', gutil.log);
 });
@@ -162,9 +167,9 @@ gulp.task('scaffold', function() {
 //this is the main watcher to use when in active development
 //  this will:
 //  startup the web server,
-//  start up livereload
+//  start up browserSync
 //  compress all scripts and SCSS files
-gulp.task('default', ['connect', 'scripts', 'styles'], function() {
+gulp.task('default', ['browserSync', 'scripts', 'styles'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
     gulp.watch('app/scripts/src/**', ['scripts']);
     gulp.watch('app/styles/scss/**', ['styles']);
