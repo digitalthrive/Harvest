@@ -24,16 +24,17 @@ gulp.task('browserSync', function() {
         },
         options: {
             reloadDelay: 250
-        }
+        },
+        notify: false
     });
 });
 
 
 //compressing images & handle SVG files
 gulp.task('images', function(tmp) {
-    console.log(tmp);
     gulp.src(['app/images/*.jpg', 'app/images/*.png'])
-        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }));
+        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
+        .pipe(gulp.dest('dist/images'));
 });
 
 //compressing images & handle SVG files
