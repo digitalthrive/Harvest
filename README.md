@@ -16,7 +16,7 @@ When you're ready to deploy, simply do the following:
 
 Version
 ==========================
-1.1.4
+1.2.0
 
 More Information
 ==========================
@@ -24,6 +24,11 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+April 13, 2015
+* Merged PR from @telephant00
+* Fixed image dev task, it wasn't pushing images to a dest
+* Removed README from images folder, causing segfault errors
+
 April 9, 2015
 * Removed LiveReload in favor of BrowserSync
 
