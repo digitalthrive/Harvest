@@ -16,7 +16,7 @@ When you're ready to deploy, simply do the following:
 
 Version
 ==========================
-1.2.0
+1.3.0
 
 More Information
 ==========================
@@ -24,6 +24,10 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+April 15, 2015
+* Merged PR from @telephant00
+* Adds SCSS Source Maps
+
 April 13, 2015
 * Merged PR from @telephant00
 * Fixed image dev task, it wasn't pushing images to a dest
