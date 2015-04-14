@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell;
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell, sourceMaps;
 
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
@@ -10,6 +10,7 @@ gutil       = require('gulp-util');
 concat      = require('gulp-concat');
 uglify      = require('gulp-uglify');
 sass        = require('gulp-sass');
+sourceMaps  = require('gulp-sourcemaps');
 imagemin    = require('gulp-imagemin');
 minifyCSS   = require('gulp-minify-css');
 browserSync = require('browser-sync');
@@ -75,6 +76,8 @@ gulp.task('scripts-deploy', function() {
 gulp.task('styles', function() {
     //the initializer / master SCSS file, which will just be a file that imports everything
     return gulp.src('app/styles/scss/init.scss')
+                //get sourceMaps ready
+                .pipe(sourceMaps.init())
                 //include SCSS and list every "include" folder
                .pipe(sass({
                       errLogToConsole: true,
@@ -90,6 +93,8 @@ gulp.task('styles', function() {
                .on('error', gutil.log)
                //the final filename of our combined css file
                .pipe(concat('styles.css'))
+                //get our sources via sourceMaps
+                .pipe(sourceMaps.write())
                //where to save our final, compressed css file
                .pipe(gulp.dest('app/styles'))
                //notify browserSync to refresh
