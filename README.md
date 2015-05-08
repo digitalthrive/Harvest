@@ -4,7 +4,7 @@ Front End Gulp Boilerplate
 Front-end boilerplate for Gulp with everything you need to get started.
 
 * First download or clone this repo :)
-* Then run `sudo npm install` to install dev dependencies. You have to use sudo because some of the dependencies install executable binaries.
+* Then run `npm install` to install dev dependencies. Use sudo if needed.
 
 During development mode, run the default task so you'll have watchers and browser sync. Simply do the following:
 * Run `gulp` to start it up
@@ -16,14 +16,18 @@ When you're ready to deploy, simply do the following:
 
 Version
 ==========================
-1.3.0
+1.3.1
 
 More Information
 ==========================
-Check out the website http://www.ryanbensonmedia.com/harvest for more information. And the documentation part is finally updated!
+Check out the website http://www.ryanbensonmedia.com/harvest for more information.
 
 Revision History
 ==========================
+May 8, 2015
+* Fixed install instructions on README
+* Minor revisions to README
+
 April 15, 2015
 * Merged PR from @telephant00
 * Adds SCSS Source Maps
