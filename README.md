@@ -16,7 +16,7 @@ When you're ready to deploy, simply do the following:
 
 Version
 ==========================
-1.3.1
+1.3.2
 
 More Information
 ==========================
@@ -24,6 +24,9 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+June 24, 2015
+* Fixed missing images folder in app when I removed placeholder
+
 May 8, 2015
 * Fixed install instructions on README
 * Minor revisions to README
