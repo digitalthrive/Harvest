@@ -4,18 +4,18 @@
   "description": "Description of your project",
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "^2.5.3",
-    "gulp": "^3.8.1",
-    "gulp-autoprefixer": "^2.1.0",
-    "gulp-concat": "^2.5.2",
+    "browser-sync": "^2.9.10",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-concat": "^2.6.0",
     "gulp-connect": "^2.2.0",
-    "gulp-imagemin": "^2.2.1",
-    "gulp-minify-css": "^1.0.0",
-    "gulp-sass": "^1.3.3",
-    "gulp-sequence": "^0.3.2",
-    "gulp-shell": "^0.4.0",
-    "gulp-sourcemaps": "^1.5.1",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.4"
+    "gulp-imagemin": "^2.3.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-sequence": "^0.4.1",
+    "gulp-shell": "^0.5.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6"
   }
 }
