@@ -1,10 +1,10 @@
 @mixin clearfix {
     zoom:1;
     &:before, &:after {
-        content: "\0020"; 
-        display: block; 
-        height: 0; 
-        overflow: hidden; 
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
     }
     &:after {
         clear: both;
@@ -129,7 +129,7 @@
     -ms-filter:        "FlipH";
 }
 
-@mixin font-face($style-name, $file, $family, $category:"") {
+@mixin font-face($style-name, $file, $family) {
   $filepath: "../fonts/" + $family + "/" + $file;
   @font-face {
     font-family: #{$style-name};
@@ -139,9 +139,6 @@
 
   %#{$style-name} {
     font: {
-      @if $category != "" {
-        family: #{$style-name}, #{$category};
-      }
       @else {
         family: #{$style-name};
       }
