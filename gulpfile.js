@@ -86,7 +86,12 @@ gulp.task('styles', function() {
     //the initializer / master SCSS file, which will just be a file that imports everything
     return gulp.src('app/styles/scss/init.scss')
                 //prevent pipe breaking caused by errors from gulp plugins
-                .pipe(plumber())
+                .pipe(plumber({
+                  errorHandler: function (err) {
+                    console.log(err);
+                    this.emit('end');
+                  }
+                }))
                 //get sourceMaps ready
                 .pipe(sourceMaps.init())
                 //include SCSS and list every "include" folder
