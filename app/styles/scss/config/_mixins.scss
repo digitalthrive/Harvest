@@ -1,10 +1,10 @@
 @mixin clearfix {
     zoom:1;
     &:before, &:after {
-        content: "\0020"; 
-        display: block; 
-        height: 0; 
-        overflow: hidden; 
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
     }
     &:after {
         clear: both;
@@ -77,7 +77,7 @@
 }
 
 @mixin box-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4), $inset: "") {
-  @if ($inset != "") {
+  @if $inset != "" {
     -webkit-box-shadow: $inset $x $y $blur $color;
     -moz-box-shadow:    $inset $x $y $blur $color;
     box-shadow:         $inset $x $y $blur $color;
@@ -129,24 +129,15 @@
     -ms-filter:        "FlipH";
 }
 
-@mixin font-face($style-name, $file, $family, $category:"") {
+@mixin font-face($style-name, $file, $family) {
   $filepath: "../fonts/" + $family + "/" + $file;
   @font-face {
-    font-family: #{$style-name};
-    src: url($filepath + ".eot");
-    src: url($filepath + ".eot?#iefix") format("embedded-opentype"), url($filepath + ".woff") format("woff"), url($filepath + ".ttf") format("truetype"), url($filepath + ".svg#" + $style-name + "") format("svg");
-  }
-
-  %#{$style-name} {
-    font: {
-      @if $category != "" {
-        family: #{$style-name}, #{$category};
-      }
-      @else {
-        family: #{$style-name};
-      }
-      weight: normal;
-    };
+    font-family: $style-name;
+      src: url('#{$filepath}.eot');
+      src: url('#{$filepath}.eot?#iefix') format('embedded-opentype'),
+           url('#{$filepath}.woff') format('woff'),
+           url('#{$filepath}.ttf') format('truetype'),
+           url('#{$filepath}.svg##{$style-name}') format('svg');
   }
 }
 
