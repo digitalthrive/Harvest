@@ -1,15 +1,17 @@
 import async from 'async';
 import fs from 'fs';
-import config from '../config/config';
+import coreConfig from '../config/config';
 import childProcess from 'child_process';
 
 const exec = childProcess.exec;
 
 export default function(config, cb) {
-  const baseDevDependencies = config.baseDevDependencies;
+  const baseDevDependencies = coreConfig.baseDevDependencies;
   config.devDependencies = baseDevDependencies;
   const {name, version, description, main, author, license, devDependencies} = config;
   const packageJsonData = {name, version, description, main, author, license, devDependencies};
+
+  console.log(packageJsonData);
 
   async.series([
     function(cb) {
