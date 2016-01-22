@@ -1,3 +1,8 @@
+/*
+ * Prompts
+ * Configuration of the CLI prompts for the configuration system
+ */
+
 export default [
   {
     type: 'input',

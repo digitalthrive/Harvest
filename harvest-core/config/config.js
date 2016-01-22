@@ -1,3 +1,8 @@
+/*
+ * Config
+ * The base Harvest configurations for files, deps, etc
+ */
+
 export default {
   files: {
     harvestConf: 'harvest.json'
