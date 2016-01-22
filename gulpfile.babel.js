@@ -6,6 +6,13 @@ import childProcess from 'child_process';
 const exec = childProcess.exec;
 
 gulp.task('configure', (cb) => {
+  const baseDevDependencies = {
+    gulp: "^3.9.0",
+    'gulp-prompt': '^0.1.2',
+    'babel-core': '^6.4.5',
+    'babel-preset-es2015': '^6.3.13'
+  };
+
   gulp.src('package.json')
       .pipe(prompt.prompt([
         {
@@ -86,6 +93,11 @@ gulp.task('configure', (cb) => {
         }
       ],
       (config) => {
+        config.devDependencies = baseDevDependencies;
+
+        const {name, version, description, main, author, license, devDependencies} = config;
+        const packageJsonData = {name, version, description, main, author, license, devDependencies};
+
         fs.writeFile('package.json', JSON.stringify(packageJsonData, null, 2), (err) => {
           if(err) console.log(err);
           console.log('Installing NPM modules');
