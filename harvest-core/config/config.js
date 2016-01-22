@@ -1,4 +1,7 @@
 export default {
+  files: {
+    harvestConf: 'harvest.json'
+  },
   baseDevDependencies: {
     "gulp": "^3.9.0",
     "gulp-prompt": "^0.1.2",
