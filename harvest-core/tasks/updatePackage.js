@@ -11,8 +11,6 @@ export default function(config, cb) {
   const {name, version, description, main, author, license, devDependencies} = config;
   const packageJsonData = {name, version, description, main, author, license, devDependencies};
 
-  console.log(packageJsonData);
-
   async.series([
     function(cb) {
       fs.writeFile('package.json', JSON.stringify(packageJsonData, null, 2), (err) => {
