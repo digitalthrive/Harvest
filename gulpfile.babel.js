@@ -86,8 +86,19 @@ gulp.task('configure', (cb) => {
         }
       ],
       (config) => {
-        console.log(config);
-        cb(null);
+        fs.writeFile('package.json', JSON.stringify(packageJsonData, null, 2), (err) => {
+          if(err) console.log(err);
+          console.log('Installing NPM modules');
+
+          let sudo = '';
+          if(config.sudo === 'Yes') sudo = 'sudo ';
+
+          exec(sudo + 'npm install; npm prune;', (err, stdout, stderr) => {
+            if(stdout) console.log(stdout);
+            if(stderr) console.log(stderr);
+            cb(err);
+          });
+        });
       }
     ))
 });
