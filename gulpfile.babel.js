@@ -2,16 +2,12 @@ import gulp from 'gulp';
 import fs from 'fs';
 import prompt from 'gulp-prompt';
 import childProcess from 'child_process';
+import config from './harvest-core/config/config';
 
 const exec = childProcess.exec;
 
 gulp.task('configure', (cb) => {
-  const baseDevDependencies = {
-    gulp: "^3.9.0",
-    'gulp-prompt': '^0.1.2',
-    'babel-core': '^6.4.5',
-    'babel-preset-es2015': '^6.3.13'
-  };
+  const baseDevDependencies = config.baseDevDependencies;
 
   gulp.src('package.json')
       .pipe(prompt.prompt([
@@ -93,6 +89,7 @@ gulp.task('configure', (cb) => {
         }
       ],
       (config) => {
+        console.log(config);
         config.devDependencies = baseDevDependencies;
 
         const {name, version, description, main, author, license, devDependencies} = config;
