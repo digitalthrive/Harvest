@@ -12,12 +12,12 @@ export default function(config, cb) {
   const packageJsonData = {name, version, description, main, author, license, devDependencies};
 
   async.series([
-    function(cb) {
+    (cb) => {
       fs.writeFile('package.json', JSON.stringify(packageJsonData, null, 2), (err) => {
         cb(err, true);
       });
     },
-    function(cb) {
+    (cb) => {
       let sudo = '';
       if(config.sudo === 'Yes') sudo = 'sudo ';
       exec(sudo + 'npm install; npm prune;', (err, stdout, stderr) => {
@@ -26,7 +26,7 @@ export default function(config, cb) {
           cb(err, true);
         });
     }
-  ], function(err, results) {
+  ], (err, results) => {
     cb(err, results);
-  })
-}
+  });
+};

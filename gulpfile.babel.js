@@ -1,3 +1,4 @@
+// Core libraries
 import gulp from 'gulp';
 import prompt from 'gulp-prompt';
 import async from 'async';
@@ -7,7 +8,7 @@ import prompts from './harvest-core/config/prompts';
 import updatePackage from './harvest-core/tasks/updatePackage';
 import writeCoreConfig from './harvest-core/tasks/writeCoreConfig';
 
-
+// Task that configures the boilerplate and workflow
 gulp.task('configure', (cb) => {
   gulp.src('package.json')
       .pipe(prompt.prompt(
@@ -17,7 +18,7 @@ gulp.task('configure', (cb) => {
             async.apply(updatePackage, config),
             async.apply(writeCoreConfig, config)
           ],
-          function(err, results) {
+          (err, results) => {
             console.log('DONE!');
           });
         }
