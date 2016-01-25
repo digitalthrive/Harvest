@@ -6,7 +6,7 @@
 // Core libraries
 import async from 'async';
 import fs from 'fs';
-import coreConfig from '../config/config';
+import coreConfig from '../../config/config';
 import childProcess from 'child_process';
 
 // We need the exec to process the CLI tasks for NPM

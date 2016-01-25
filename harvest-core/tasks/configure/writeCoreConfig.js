@@ -5,7 +5,7 @@
 
 // Core libraries
 import fs from 'fs';
-import coreConfig from '../config/config';
+import coreConfig from '../../config/config';
 
 /*
  * default
