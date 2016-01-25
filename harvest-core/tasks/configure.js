@@ -3,8 +3,8 @@ import prompt from 'gulp-prompt';
 import async from 'async';
 import prompts from '../config/prompts';
 
-import updatePackage from './updatePackage';
-import writeCoreConfig from './writeCoreConfig';
+import updatePackage from './configure/updatePackage';
+import writeCoreConfig from './configure/writeCoreConfig';
 
 export default function() {
   gulp.src('package.json')
