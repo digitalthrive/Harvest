@@ -7,6 +7,10 @@ const isDir = (path, cb) => {
   })
 };
 
+const mkdir = (path, cb) => {
+  fs.mkdir(path, (err) => cb(err));
+};
+
 export default function(config, cb) {
   isDir(config.src, (err, results) => {
     console.log(err);
