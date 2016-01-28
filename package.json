@@ -1,15 +1,15 @@
 {
   "name": "Harvest",
-  "version": "2.0.0",
-  "description": "Front-End Boilerplate",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "author": "Ryan Benson",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "async": "^1.5.2",
     "gulp": "^3.9.0",
     "gulp-prompt": "^0.1.2",
     "babel-core": "^6.4.5",
-    "babel-preset-es2015": "^6.3.13"
+    "babel-preset-es2015": "^6.3.13",
+    "async": "^1.5.2"
   }
 }
