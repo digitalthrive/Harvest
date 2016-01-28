@@ -18,6 +18,10 @@ const readOrMakeDir = (path, cb) => {
   });
 };
 
+const move = (source, dest, cb) => {
+  /* needs to implement moving template to source */
+};
+
 export default function(config, cb) {
   async.parallel([
     (cb) => {
