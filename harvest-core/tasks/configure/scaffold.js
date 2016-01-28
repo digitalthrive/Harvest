@@ -11,11 +11,14 @@ const mkdir = (path, cb) => {
   fs.mkdir(path, (err) => cb(err));
 };
 
-export default function(config, cb) {
+const readOrMakeDir = (path, cb) = {
   isDir(config.src, (err, results) => {
-    console.log(err);
-    console.log(results);
+    if(err.code === 'ENOENT') mkdir(path, (err) => cb(err));
   });
+};
+
+export default function(config, cb) {
+  
 
   cb(null);
 };
