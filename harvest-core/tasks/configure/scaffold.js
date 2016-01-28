@@ -35,7 +35,9 @@ const mkdir = (path, cb) => {
  */
 const readOrMakeDir = (path, cb) => {
   isDir(path, (err, results) => {
-    if(err.code === 'ENOENT') mkdir(path, (err) => cb(err));
+    if(err && err.code === 'ENOENT' && !results) return mkdir(path, (err) => cb(err));
+    console.log(`Could not create ${path}, make sure that this doesn't exist`);
+    cb(null);
   });
 };
 
