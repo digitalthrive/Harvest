@@ -1,3 +1,4 @@
-export default function() {
-  console.log('scaffold');
+export default function(config, cb) {
+  console.log(config);
+  cb(null);
 };
