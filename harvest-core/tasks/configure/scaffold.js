@@ -1,4 +1,5 @@
 import fs from 'fs';
+import async from 'async';
 
 const isDir = (path, cb) => {
   fs.stat(path, (err, stats) => {
@@ -11,14 +12,23 @@ const mkdir = (path, cb) => {
   fs.mkdir(path, (err) => cb(err));
 };
 
-const readOrMakeDir = (path, cb) = {
-  isDir(config.src, (err, results) => {
+const readOrMakeDir = (path, cb) => {
+  isDir(path, (err, results) => {
     if(err.code === 'ENOENT') mkdir(path, (err) => cb(err));
   });
 };
 
 export default function(config, cb) {
-  
+  async.parallel([
+    (cb) => {
+      readOrMakeDir(config.src, (err) => cb(err));
+    },
+    (cb) => {
+      readOrMakeDir(config.dist, (err) => cb(err));
+    }
+  ], (err, results) => {
+    console.log('Finished with the directories');
+    cb(err, results);
+  });
 
-  cb(null);
 };
