@@ -12,6 +12,7 @@ import prompts from '../config/prompts';
 // Sub tasks
 import updatePackage from './configure/updatePackage';
 import writeCoreConfig from './configure/writeCoreConfig';
+import scaffold from './configure/scaffold';
 
 /*
  * default
@@ -25,7 +26,8 @@ export default function() {
         (config) => {
           async.parallel([
             async.apply(updatePackage, config),
-            async.apply(writeCoreConfig, config)
+            async.apply(writeCoreConfig, config),
+            async.apply(scaffold, config)
           ],
           (err, results) => {
             console.log('DONE!');
