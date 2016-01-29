@@ -4,8 +4,9 @@
  */
 
 // Core libraries
-import fs from 'fs';
+import fs from 'fs.extra'; // will include native FS and extras
 import async from 'async';
+import coreConfig from '../../config/config';
 
 /*
  * isDir - checks to see if a given path is a directory or not
@@ -60,14 +61,14 @@ const move = (source, dest, cb) => {
 export default function(config, cb) {
   async.parallel([
     (cb) => {
-      readOrMakeDir(config.src, (err) => cb(err));
+      fs.copyRecursive(coreConfig.files.template, config.src, (err) => cb(err));
     },
     (cb) => {
       readOrMakeDir(config.dist, (err) => cb(err));
     }
   ], (err, results) => {
     console.log('Finished with the directories');
-    cb(err, results);
+    return cb(err, results);
   });
 
 };
