@@ -5,7 +5,8 @@
 
 export default {
   files: {
-    harvestConf: 'harvest.json'
+    harvestConf: 'harvest.json',
+    template: './harvest-core/template'
   },
   baseDevDependencies: {
     "gulp": "^3.9.0",
