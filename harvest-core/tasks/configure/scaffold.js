@@ -43,13 +43,12 @@ const readOrMakeDir = (path, cb) => {
 };
 
 /*
- * move - moves the template boilerplate to the source directory
- * @params {string} source - where to copy from
+ * copyTemplate - moves the template boilerplate to the source directory
  * @params {string} dest - where to copy to
  * @params {function} cb - callback to run when done
  */
-const move = (source, dest, cb) => {
-  /* needs to implement moving template to source */
+const copyTemplate = (dest, cb) => {
+  fs.copyRecursive(coreConfig.files.template, dest, (err) => cb(err));
 };
 
 /*
@@ -61,7 +60,7 @@ const move = (source, dest, cb) => {
 export default function(config, cb) {
   async.parallel([
     (cb) => {
-      fs.copyRecursive(coreConfig.files.template, config.src, (err) => cb(err));
+      copyTemplate(config.src, (err) => cb(err));
     },
     (cb) => {
       readOrMakeDir(config.dist, (err) => cb(err));
