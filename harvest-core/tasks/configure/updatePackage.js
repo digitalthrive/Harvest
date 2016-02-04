@@ -20,6 +20,7 @@ const addLibs = (npmDevDep, config) => {
   if(config.js === 'Browserify') npmDevDep['vinyl-source-stream'] = '^1.1.0';
   if(config.js === 'Webpack') npmDevDep['gulp-webpack'] = '^1.5.0';
   if(config.js === 'JS PM') npmDevDep['gulp-jspm'] = '^0.5.6';
+  return npmDevDep;
 };
 
 /*
