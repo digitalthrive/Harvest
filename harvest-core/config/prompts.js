@@ -51,7 +51,7 @@ export default [
     type: 'list',
     name: 'js',
     message: 'What JS manager do you want to use?',
-    choices: ['Browserify', 'Webpack', 'JS PM', 'RequireJS'],
+    choices: ['Browserify', 'Webpack', 'JS PM'],
     default: 'None'
   },
   {
