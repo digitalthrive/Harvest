@@ -17,9 +17,14 @@ When you're ready to deploy, simply do the following:
 * Run `gulp deploy`
 * All of the files you need will be in /dist with your images optimized, css compressed and js compressed
 
+## Node Versions Supported
+The following Node versions have been tested
+* 4.x
+* 6.x
+
 Version
 ==========================
-1.3.2
+1.4.0
 
 News
 ==========================
@@ -39,6 +44,9 @@ Check out the website http://www.ryanbensonmedia.com/harvest for more informatio
 
 Revision History
 ==========================
+February 6, 2016
+* Merged in pull request from @rennan that updates dependencies
+
 June 24, 2015
 * Fixed missing images folder in app when I removed placeholder
 
