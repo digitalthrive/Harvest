@@ -26,21 +26,7 @@ Version
 ==========================
 1.4.0
 
-News
-==========================
-Version 2.0 is currently under development! It'll be a big release and will include some pretty cool and easy features. It'll make using and customizing Harvest a breeze. A peak on what's to come:
-* Generator-based so it's simple to configure how you want
-* Modular tasks makes it easy to tweak it without digging through everything
-* More options! Including LESS, SCSS, Stylus, ES2015, Browserify, and many more options that will be supported out of the box
-* More suprises :)
-
-The current phases of work is being maintained on thos KANBAN: https://tree.taiga.io/project/ryanbenson-harvest-20/kanban so if you want to see how things are proressing you can see what's going on. If you have any ideas or thoughts let me know, as now is the time.
-
 Thanks for everyone's support and appreciation for this project!
-
-More Information
-==========================
-Check out the website http://www.ryanbensonmedia.com/harvest for more information.
 
 Revision History
 ==========================
